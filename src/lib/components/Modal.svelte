@@ -50,7 +50,7 @@
     </div>
     <div>
       <h3>Automatisch Fortfahren</h3>
-      <p>Wenn beide Umrechnungen korrekt sind, generiert die Seite <strong>nach einer Sekunde</strong> automatisch eine neue Zahl.</p>
+      <p class="option-text">Wenn beide Umrechnungen korrekt sind, generiert die Seite <strong>nach einer Sekunde</strong> automatisch eine neue Zahl.</p>
       <input type="checkbox" name="switch" id="switch" bind:checked={$automaticContinue} />
     </div>
   </div>
