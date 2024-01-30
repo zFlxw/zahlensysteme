@@ -17,10 +17,6 @@
   function setRangeTo(event: Event) {
     rangeTo.set((event.target as any).value);
   }
-
-  function setAutomaticContinue(event: Event) {
-    automaticContinue.set((event.target as any).checked);
-  }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->

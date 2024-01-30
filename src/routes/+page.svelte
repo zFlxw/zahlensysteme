@@ -56,7 +56,7 @@
                 input.style.border = successBorder;
               } else {
                 input.style.border = wrongBorder;
-                wrong = true
+                wrong = true;
               }
               break;
             case 'hexadecimal':
@@ -149,18 +149,18 @@
       <div class="flex w-full items-center justify-between">
         <h2>Ausgangssystem</h2>
         <button
-          class={`show xs:hidden transition ${collapsed ? 'rotate-90' : ''}`}
+          class={`show transition xs:hidden ${collapsed ? 'rotate-90' : ''}`}
           on:click={() => (collapsed = !collapsed)}
         >
           <ChevronDown />
         </button>
       </div>
       <ul
-        class="xs:flex-nowrap flex w-full flex-wrap justify-between overflow-x-auto rounded-md border border-neutral-200 bg-white"
+        class="flex w-full flex-wrap justify-between overflow-x-auto rounded-md border border-neutral-200 bg-white xs:flex-nowrap"
       >
         {#each navElements as element}
           <li
-            class={`relative z-10 flex w-full justify-center px-2 py-1 ${collapsed && element !== fromMode ? 'hidden xs:show' : 'show'}`}
+            class={`relative z-10 flex w-full justify-center px-2 py-1 ${collapsed && element !== fromMode ? 'xs:show hidden' : 'show'}`}
           >
             {#if element === fromMode}
               <span class="active" in:receive={{ key: token }} out:send={{ key: token }}></span>
@@ -173,7 +173,7 @@
       </ul>
     </div>
   </header>
-  <main class="xs:justify-between flex w-full flex-col gap-16">
+  <main class="flex w-full flex-col gap-16 xs:justify-between">
     <div class="box w-full">
       <div>
         <h2>Aufgabe</h2>
@@ -182,7 +182,7 @@
           <code>
             {number.toUpperCase()}<sub>{getBase(currentMode)}</sub>
           </code>
-          in folgende Zahlensysteme um.
+          in die untenstehenden Zahlensysteme um und gib das Ergebnis ein.
         </p>
       </div>
       <form class="flex flex-col gap-4" use:form on:submit|preventDefault>
@@ -194,7 +194,11 @@
             </li>
           {/each}
         </ul>
-        <input type="submit" value="Überprüfen" class="cursor-pointer hover:shadow-md hover:shadow-success/30 transition duration-75"/>
+        <input
+          type="submit"
+          value="Überprüfen"
+          class="cursor-pointer transition duration-75 hover:shadow-md hover:shadow-success/30"
+        />
       </form>
     </div>
     <ul class="flex w-full flex-col gap-4">
@@ -207,5 +211,4 @@
   </footer>
 </div>
 
-<Modal bind:showModal>
-</Modal>
+<Modal bind:showModal></Modal>
