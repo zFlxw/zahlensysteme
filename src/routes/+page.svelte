@@ -100,7 +100,7 @@
     }
   };
 
-  $: getBase = (mode: string) => {
+  const getBase = (mode: string) => {
     switch (mode) {
       case 'decimal':
         return 10;
