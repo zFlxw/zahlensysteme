@@ -207,7 +207,7 @@
       <button class="btn" on:click={() => (showModal = true)}><SettingsIcon /> Optionen</button>
     </ul>
   </main>
-  <footer class="flex justify-center py-2 text-neutral-300">
+  <footer class="flex justify-end py-2 text-neutral-100">
     <a href="https://flxw.dev/legal" target="_blank">Impressum</a>
   </footer>
 </div>
