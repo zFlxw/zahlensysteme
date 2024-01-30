@@ -1,6 +1,4 @@
 <script lang="ts">
-  /*import ShuffleIcon from '$lucide/shuffle.svelte';
-  import SettingsIcon from '$lucide/settings.svelte';*/
   import { ShuffleIcon, SettingsIcon, ChevronDown } from 'lucide-svelte';
   import { createForm } from 'felte';
   import { onMount } from 'svelte';
@@ -74,7 +72,7 @@
   const generateNumber = () => {
     activeInputs.forEach((input) => {
       input.value = '';
-      input.style.border = '1px solid rgb(209 213 219)';
+      input.style.border = `1px solid ${fullConfig.theme.colors.neutral[300]}`;
     });
 
     let num = Math.floor(Math.random() * (rangeTo - rangeFrom + 1)) + rangeFrom;
