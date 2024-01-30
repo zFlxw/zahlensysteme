@@ -31,16 +31,18 @@
 
   const { form } = createForm({
     onSubmit: (values) => {
+      let wrong = false;
       modes
         .filter((mode) => mode !== currentMode)
         .forEach((mode) => {
-          const value = values[mode];
+          let value = values[mode];
           if (!value) {
             return;
           }
 
+          value = value.replace(' ', '');
           const input = document.getElementById(`${mode}-input`) as HTMLInputElement;
-          let wrong = false;
+
           switch (mode) {
             case 'decimal':
               if (parseInt(value, 10) === parseInt(number, getBase(currentMode))) {
@@ -70,13 +72,12 @@
             default:
               break;
           }
-
-          if ($automaticContinue && !wrong) {
-            setTimeout(() => {
-              generateNumber();
-            }, 1000);
-          }
         });
+      if ($automaticContinue && !wrong) {
+        setTimeout(() => {
+          generateNumber();
+        }, 1000);
+      }
     },
   });
 
