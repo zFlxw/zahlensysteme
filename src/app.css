@@ -90,10 +90,6 @@
   code {
     @apply border border-neutral-200 bg-neutral-100 px-1 py-0.5;
   }
-
-  p {
-    @apply text-sm;
-  }
 }
 
 @layer utilities {
@@ -107,5 +103,9 @@
 
   .active {
     @apply absolute bottom-0 left-0 right-0 top-0 -z-10 mx-2 my-1 rounded-md bg-neutral-100;
+  }
+
+  .option-text {
+    @apply text-sm;
   }
 }
