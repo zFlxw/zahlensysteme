@@ -5,6 +5,8 @@
   import { crossfade } from 'svelte/transition';
   import resolveConfig from 'tailwindcss/resolveConfig';
   import tailwindConfig from '../../tailwind.config.js';
+  import Modal from '$lib/components/Modal.svelte';
+  import { automaticContinue, rangeFrom, rangeTo } from '$lib/stores.js';
 
   const modes = ['decimal', 'binary', 'hexadecimal'];
   const navElements = ['decimal', 'binary', 'hexadecimal', 'random'];
@@ -18,9 +20,8 @@
   const successBorder = `1px solid ${fullConfig.theme.textColor.success}`;
   const wrongBorder = `1px solid ${fullConfig.theme.textColor.wrong}`;
 
-  let rangeFrom = 1;
-  let rangeTo = 10;
   let collapsed = false;
+  let showModal = false;
 
   let fromMode: string = 'decimal';
   let currentMode: string;
@@ -39,6 +40,7 @@
           }
 
           const input = document.getElementById(`${mode}-input`) as HTMLInputElement;
+          let wrong = false;
           switch (mode) {
             case 'decimal':
               if (parseInt(value, 10) === parseInt(number, getBase(currentMode))) {
@@ -46,6 +48,7 @@
                 console.log('Border Style', input.style.border);
               } else {
                 input.style.border = wrongBorder;
+                wrong = true;
               }
               break;
             case 'binary':
@@ -53,6 +56,7 @@
                 input.style.border = successBorder;
               } else {
                 input.style.border = wrongBorder;
+                wrong = true
               }
               break;
             case 'hexadecimal':
@@ -60,10 +64,17 @@
                 input.style.border = successBorder;
               } else {
                 input.style.border = wrongBorder;
+                wrong = true;
               }
               break;
             default:
               break;
+          }
+
+          if ($automaticContinue && !wrong) {
+            setTimeout(() => {
+              generateNumber();
+            }, 1000);
           }
         });
     },
@@ -75,7 +86,7 @@
       input.style.border = `1px solid ${fullConfig.theme.colors.neutral[300]}`;
     });
 
-    let num = Math.floor(Math.random() * (rangeTo - rangeFrom + 1)) + rangeFrom;
+    let num = Math.floor(Math.random() * ($rangeTo - $rangeFrom + 1)) + $rangeFrom;
     if (fromMode === 'random') {
       currentMode = modes[Math.floor(Math.random() * modes.length)];
     } else {
@@ -149,7 +160,7 @@
       >
         {#each navElements as element}
           <li
-            class={`relative z-10 flex w-full justify-center px-2 py-1 ${collapsed && element !== fromMode ? 'hidden' : 'show'}`}
+            class={`relative z-10 flex w-full justify-center px-2 py-1 ${collapsed && element !== fromMode ? 'hidden xs:show' : 'show'}`}
           >
             {#if element === fromMode}
               <span class="active" in:receive={{ key: token }} out:send={{ key: token }}></span>
@@ -188,10 +199,13 @@
     </div>
     <ul class="flex w-full flex-col gap-4">
       <button class="btn" on:click={generateNumber}><ShuffleIcon /> Shuffle</button>
-      <button class="btn"><SettingsIcon /> Optionen</button>
+      <button class="btn" on:click={() => (showModal = true)}><SettingsIcon /> Optionen</button>
     </ul>
   </main>
   <footer class="flex justify-center py-2 text-neutral-300">
     <a href="https://flxw.dev/legal" target="_blank">Impressum</a>
   </footer>
 </div>
+
+<Modal bind:showModal>
+</Modal>

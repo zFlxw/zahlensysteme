@@ -71,8 +71,16 @@
     @apply text-xl font-semibold;
   }
 
+  h3 {
+    @apply font-medium;
+  }
+
   input[type='text'] {
     @apply rounded-md border border-neutral-300 px-4 py-2 transition duration-75 focus:shadow-md focus:outline-none focus:ring-0;
+  }
+
+  input[type='number'] {
+    @apply border border-neutral-300 px-2 py-0.5;
   }
 
   input[type='submit'] {
@@ -81,6 +89,10 @@
 
   code {
     @apply border border-neutral-200 bg-neutral-100 px-1 py-0.5;
+  }
+
+  p {
+    @apply text-sm;
   }
 }
 
